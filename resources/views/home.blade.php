@@ -226,84 +226,56 @@
     </div>
 </section>
 
-    {{-- BERITA / BSD TERKINI --}}
-    <section class="py-16 bg-[#050511] relative">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-3/4 bg-[#254E99] opacity-10 blur-[100px] rounded-full pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-white mb-2 tracking-wide">BSD Terkini</h2>
-                <div class="h-1 w-20 bg-gradient-to-r from-[#254E99] to-[#7C18B6] mx-auto rounded-full"></div>
-            </div>
-            <div class="swiper mySwiper pb-12"> 
-                <div class="swiper-wrapper">
-                    {{-- ITEM 1 --}}
-                    <div class="swiper-slide !h-auto"> 
-                        <div class="bg-[#101025] border border-[#254E99]/30 rounded-2xl overflow-hidden shadow-lg group hover:-translate-y-1 transition-transform duration-300">
-                            <div class="h-52 w-full overflow-hidden relative bg-gray-800">
-                                <img src="{{ asset('images/news1.jpg') }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                                <div class="absolute top-3 right-3 bg-[#7C18B6] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">20 Nov</div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="text-white font-bold text-lg leading-snug mb-4 line-clamp-2 group-hover:text-[#4B7BEC] transition-colors">2 Mahasiswa Berangkat Kunjungan ke Ngawi</h3>
-                                <div class="pt-4 border-t border-gray-800">
-                                    <a href="#" class="text-sm text-gray-400 hover:text-white flex items-center gap-2 transition-colors">Baca Selengkapnya <i class="fas fa-arrow-right text-xs text-[#7C18B6]"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- ITEM 2 --}}
-                    <div class="swiper-slide !h-auto">
-                        <div class="bg-[#101025] border border-[#254E99]/30 rounded-2xl overflow-hidden shadow-lg group hover:-translate-y-1 transition-transform duration-300">
-                            <div class="h-52 w-full overflow-hidden relative bg-gray-800">
-                                <img src="{{ asset('images/news2.jpg') }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                                <div class="absolute top-3 right-3 bg-[#7C18B6] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">18 Nov</div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="text-white font-bold text-lg leading-snug mb-4 line-clamp-2 group-hover:text-[#4B7BEC] transition-colors">KUI Polije Tingkatkan Layanan Internasional</h3>
-                                <div class="pt-4 border-t border-gray-800">
-                                    <a href="#" class="text-sm text-gray-400 hover:text-white flex items-center gap-2 transition-colors">Baca Selengkapnya <i class="fas fa-arrow-right text-xs text-[#7C18B6]"></i></a>
-                                </div>
+    {{-- BERITA / BSD TERKINI DINAMIS --}}
+<section class="py-16 bg-[#050511] relative">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-3/4 bg-[#254E99] opacity-10 blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-white mb-2 tracking-wide">BSD Terkini</h2>
+            <div class="h-1 w-20 bg-gradient-to-r from-[#254E99] to-[#7C18B6] mx-auto rounded-full"></div>
+        </div>
+        
+        {{-- CEK APAKAH ADA BERITA (PENTING) --}}
+        @if($beritasTerkini->isEmpty())
+            <p class="text-center text-gray-500 py-10">Belum ada berita terbaru yang diterbitkan. Silakan tambahkan dari Admin Dashboard.</p>
+        @else
+        {{-- CONTAINER SLIDER --}}
+        <div class="swiper mySwiper pb-12"> 
+            <div class="swiper-wrapper">
+                
+                {{-- LOOPING BERITA DARI DATABASE --}}
+                @foreach($beritasTerkini as $berita)
+                <div class="swiper-slide !h-auto"> 
+                    <div class="bg-[#101025] border border-[#254E99]/30 rounded-2xl overflow-hidden shadow-lg group hover:-translate-y-1 transition-transform duration-300">
+                        <div class="h-52 w-full overflow-hidden relative bg-gray-800">
+                            {{-- GAMBAR DARI DATABASE (Gunakan 'storage/') --}}
+                            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" 
+                                 onerror="this.onerror=null; this.src='{{ asset('images/placeholder-news.png') }}';" {{-- FALLBACK AMAN JIKA FILE HILANG --}}
+                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            
+                            <div class="absolute top-3 right-3 bg-[#7C18B6] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                                {{ $berita->created_at->format('d M') }} {{-- TANGGAL DARI DB --}}
                             </div>
                         </div>
-                    </div>
-                    {{-- ITEM 3 --}}
-                    <div class="swiper-slide !h-auto">
-                        <div class="bg-[#101025] border border-[#254E99]/30 rounded-2xl overflow-hidden shadow-lg group hover:-translate-y-1 transition-transform duration-300">
-                            <div class="h-52 w-full overflow-hidden relative bg-gray-800">
-                                <img src="{{ asset('images/news3.jpg') }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                                <div class="absolute top-3 right-3 bg-[#7C18B6] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">15 Nov</div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="text-white font-bold text-lg leading-snug mb-4 line-clamp-2 group-hover:text-[#4B7BEC] transition-colors">Workshop Digital Marketing 2024</h3>
-                                <div class="pt-4 border-t border-gray-800">
-                                    <a href="#" class="text-sm text-gray-400 hover:text-white flex items-center gap-2 transition-colors">Baca Selengkapnya <i class="fas fa-arrow-right text-xs text-[#7C18B6]"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- ITEM 4 --}}
-                    <div class="swiper-slide !h-auto">
-                        <div class="bg-[#101025] border border-[#254E99]/30 rounded-2xl overflow-hidden shadow-lg group hover:-translate-y-1 transition-transform duration-300">
-                            <div class="h-52 w-full overflow-hidden relative bg-gray-800">
-                                <img src="{{ asset('images/news4.jpg') }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                                <div class="absolute top-3 right-3 bg-[#7C18B6] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">10 Nov</div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="text-white font-bold text-lg leading-snug mb-4 line-clamp-2 group-hover:text-[#4B7BEC] transition-colors">Prestasi Mahasiswa di Ajang Nasional</h3>
-                                <div class="pt-4 border-t border-gray-800">
-                                    <a href="#" class="text-sm text-gray-400 hover:text-white flex items-center gap-2 transition-colors">Baca Selengkapnya <i class="fas fa-arrow-right text-xs text-[#7C18B6]"></i></a>
-                                </div>
+                        
+                        <div class="p-5">
+                            <h3 class="text-white font-bold text-lg leading-snug mb-4 line-clamp-2 group-hover:text-[#4B7BEC] transition-colors">
+                                {{ $berita->judul }} {{-- JUDUL DARI DB --}}
+                            </h3>
+                            
+                            <div class="pt-4 border-t border-gray-800">
+                                <a href="#" class="text-sm text-gray-400 hover:text-white flex items-center gap-2 transition-colors">
+                                    Baca Selengkapnya <i class="fas fa-arrow-right text-xs text-[#7C18B6]"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-pagination !bottom-0"></div>
+                @endforeach
+                
             </div>
-            <div class="text-center mt-8">
-                 <a href="/berita" class="inline-block px-8 py-2 rounded-full border border-[#7C18B6] text-[#7C18B6] font-semibold hover:bg-[#7C18B6] hover:text-white transition duration-300">Lihat Semua Berita</a>
-            </div>
+            <div class="swiper-pagination !bottom-0"></div>
         </div>
-    </section>
 
     {{-- SCRIPT DILETAKKAN DI BAGIAN BAWAH CONTENT AGAR TIDAK MENGGANGGU LAYOUT --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
