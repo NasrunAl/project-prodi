@@ -69,7 +69,7 @@
         <div class="bg-gray-950 border border-gray-800 rounded-xl p-4">
             <div class="flex items-center justify-between mb-3">
                 <h2 class="text-sm font-semibold">Berita Terbaru</h2>
-                <a href="#" class="text-xs text-indigo-400 hover:underline">Lihat semua</a>
+                <a href="{{ route('admin.berita.index') }}" class="text-xs text-indigo-400 hover:underline">Lihat semua</a>
             </div>
 
             @if($beritaTerbaru->isEmpty())
@@ -113,7 +113,7 @@
         {{-- DOSEN TERBARU --}}
         <div class="bg-gray-950 border border-gray-800 rounded-xl p-4">
             <div class="flex items-center justify-between mb-3">
-                <h2 class="text-sm font-semibold">Dosen Terbaru</h2>
+                <h2 class="text-sm font-semibold">Civitas Terbaru</h2>
                 <a href="{{ route('admin.dosen.index') }}" class="text-xs text-indigo-400 hover:underline">Kelola dosen</a>
             </div>
 

@@ -11,10 +11,13 @@ return new class extends Migration
         Schema::create('beritas', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->text('isi');
-            $table->string('gambar')->nullable(); // Path gambar headline
-            $table->string('penulis')->nullable();
-            $table->timestamps(); // created_at (Tanggal dibuat) & updated_at
+            $table->string('penulis')->nullable(); // Kolom penulis
+            $table->string('slug')->nullable();
+            $table->text('konten'); // Kolom isi berita
+            $table->string('gambar')->nullable();
+            $table->text('excerpt')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->timestamps();
         });
     }
 

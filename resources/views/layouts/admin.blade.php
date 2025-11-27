@@ -36,12 +36,7 @@
             {{-- Menu lain (nanti diisi ketika sudah buat modulnya) --}}
             <div class="mt-4 text-xs font-semibold text-gray-400 uppercase tracking-wide">Konten</div>
 
-            <a href="#" class="flex items-center px-3 py-2 rounded-md text-gray-300 hover:bg-gray-800">
-                <i class="fa-solid fa-building-columns w-5 mr-2"></i>
-                <span>Profil Prodi</span>
-            </a>
-
-            <a href="#" class="flex items-center px-3 py-2 rounded-md text-gray-300 hover:bg-gray-800">
+            <a href="{{ route('admin.profil-lulusan.index') }}" class="flex items-center px-3 py-2 rounded-md text-gray-300 hover:bg-gray-800">
                 <i class="fa-solid fa-user-graduate w-5 mr-2"></i>
                 <span>Profil Lulusan</span>
             </a>
@@ -51,12 +46,12 @@
                 <span>Civitas</span>
             </a>
 
-            <a href="#" class="flex items-center px-3 py-2 rounded-md text-gray-300 hover:bg-gray-800">
+            <a href="{{ route('admin.fasilitas.index') }}" class="flex items-center px-3 py-2 rounded-md text-gray-300 hover:bg-gray-800">
                 <i class="fa-solid fa-school-flag w-5 mr-2"></i>
                 <span>Fasilitas</span>
             </a>
 
-            <a href="#" class="flex items-center px-3 py-2 rounded-md text-gray-300 hover:bg-gray-800">
+            <a href="{{ route('admin.berita.index') }}" class="flex items-center px-3 py-2 rounded-md text-gray-300 hover:bg-gray-800">
                 <i class="fa-solid fa-newspaper w-5 mr-2"></i>
                 <span>Berita</span>
             </a>

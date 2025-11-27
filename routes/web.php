@@ -2,57 +2,57 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController; // PENTING: Untuk halaman Home
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CivitasController;
+use App\Http\Controllers\FasilitasController; // <-- CONTROLLER PUBLIK FASILITAS
+
 // Import Controller Admin di sini
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DosenController;
-use App\Http\Controllers\Admin\BeritaController; // PENTING: Untuk CRUD Berita
+use App\Http\Controllers\Admin\BeritaController;
+use App\Http\Controllers\Admin\FasilitasController as AdminFasilitasController; // admin controller aliased to avoid name clash with public controller
 
-// ================== HALAMAN PUBLIK ================== //
-
-// ROUTE UTAMA HOME (Mengambil data Berita)
+// ROUTE UTAMA HOME
 Route::get('/', [HomeController::class, 'index']); 
 
 Route::get('/akademik', function () {
-    return view('akademik');
+    $profils = \App\Models\ProfilLulusan::orderBy('urutan', 'asc')->get();
+    return view('akademik', compact('profils'));
 });
 
-Route::get('/fasilitas', function () {
-    return view('fasilitas');
-});
+// ROUTE FASILITAS PUBLIK (DINAMIS DENGAN CONTROLLER)
+Route::get('/fasilitas', [FasilitasController::class, 'index'])->name('fasilitas.index');
+
+// Halaman Berita Publik
+Route::get('/berita', function () {
+    $beritas = \App\Models\Berita::latest()->paginate(10); 
+    return view('berita.index', compact('beritas'));
+})->name('berita.index');
 
 // Halaman Civitas Publik
 Route::get('/civitas', [CivitasController::class, 'index'])->name('civitas');
-Route::get('/civitas/lengkap', [CivitasController::class, 'lengkap'])->name('civitas.lengkap');
-
 
 // ================== AUTH (LOGIN/LOGOUT) ================== //
 
-// Tampilkan form login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-
-// Proses login
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
-
-// Proses logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // ================== ADMIN (HANYA SETELAH LOGIN) ================== //
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     
-    // Redirect /admin ke dashboard
     Route::get('/', function () {
         return redirect()->route('admin.dashboard');
     });
 
-    // Dashboard Utama
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // CRUD Dosen
+    // CRUD Resource
     Route::resource('dosen', DosenController::class);
+    Route::resource('berita', BeritaController::class);
+    Route::resource('profil-lulusan', \App\Http\Controllers\Admin\ProfilLulusanController::class);
 
-    // CRUD Berita (BARU)
-    Route::resource('berita', BeritaController::class); 
+    // CRUD Fasilitas (admin)
+    Route::resource('fasilitas', AdminFasilitasController::class)->except(['show']);
 });

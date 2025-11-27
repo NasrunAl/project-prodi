@@ -276,32 +276,37 @@
             </div>
             <div class="swiper-pagination !bottom-0"></div>
         </div>
+        {{-- TUTUP ELSE --}}
+        @endif
 
-    {{-- SCRIPT DILETAKKAN DI BAGIAN BAWAH CONTENT AGAR TIDAK MENGGANGGU LAYOUT --}}
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    </div> {{-- tutup .max-w-7xl --}}
+</section>
 
-    <script>
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            spaceBetween: 24,
-            pagination: { el: ".swiper-pagination", clickable: true, dynamicBullets: true },
-            breakpoints: { 640: { slidesPerView: 2 }, 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } }
-        });
+{{-- SCRIPT DILETAKKAN DI BAGIAN BAWAH CONTENT AGAR TIDAK MENGGANGGU LAYOUT --}}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const text = "BISNIS DIGITAL";
-            const speed = 80;
-            let i = 0;
-            function typeWriter() {
-                if (i < text.length) {
-                    const el = document.getElementById("typingText");
-                    if(el) { el.innerHTML += text.charAt(i); }
-                    i++;
-                    setTimeout(typeWriter, speed);
-                }
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 24,
+        pagination: { el: ".swiper-pagination", clickable: true, dynamicBullets: true },
+        breakpoints: { 640: { slidesPerView: 2 }, 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const text = "BISNIS DIGITAL";
+        const speed = 80;
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                const el = document.getElementById("typingText");
+                if(el) { el.innerHTML += text.charAt(i); }
+                i++;
+                setTimeout(typeWriter, speed);
             }
-            typeWriter();
-        });
-    </script>
+        }
+        typeWriter();
+    });
+</script>
 @endsection
