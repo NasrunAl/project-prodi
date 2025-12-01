@@ -63,35 +63,38 @@ class FasilitasController extends Controller
     /**
      * EDIT: Menampilkan form untuk mengedit fasilitas tertentu.
      */
-    public function edit(Fasilitas $fasilitas)
+    public function edit($id)
     {
+        $fasilitas = Fasilitas::findOrFail($id);
         return view('admin.fasilitas.edit', compact('fasilitas'));
     }
 
     /**
      * UPDATE: Memperbarui fasilitas tertentu dan mengelola perubahan gambar.
      */
-    public function update(Request $request, Fasilitas $fasilitas)
+    public function update(Request $request, $id)
     {
+        $fasilitas = Fasilitas::findOrFail($id);
+
         // 1. Validasi Data
         $request->validate([
             'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'ikon_fa' => 'nullable|string|max:50',
             // Gambar tidak wajib diisi saat update, tapi jika diisi harus valid
-            'gambar' => 'image|mimes:jpeg,png,jpg,webp|max:2048', 
+            'gambar' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
-        
+
         $imagePath = $fasilitas->gambar;
 
         // 2. Handle Upload Gambar Baru
         if ($request->hasFile('gambar')) {
-            
+
             // Hapus gambar lama jika ada
             if ($fasilitas->gambar) {
                 Storage::disk('public')->delete($fasilitas->gambar);
             }
-            
+
             // Simpan gambar baru
             $imagePath = $request->file('gambar')->store('fasilitas', 'public');
         }
@@ -111,17 +114,25 @@ class FasilitasController extends Controller
     /**
      * DELETE: Menghapus fasilitas dari database dan file gambar terkait.
      */
-    public function destroy(Fasilitas $fasilitas)
+    public function destroy($id)
     {
+        // Debug: Log the ID
+        \Log::info('Destroy method called for Fasilitas ID: ' . $id);
+
+        $fasilitas = Fasilitas::findOrFail($id);
+
         // 1. Hapus File Gambar dari Storage
         if ($fasilitas->gambar) {
             Storage::disk('public')->delete($fasilitas->gambar);
         }
-        
+
         $nama = $fasilitas->nama;
-        
+
         // 2. Hapus Data dari Database
-        $fasilitas->delete();
+        $deleted = $fasilitas->delete();
+
+        // Debug: Log if deletion was successful
+        \Log::info('Deletion result: ' . ($deleted ? 'Success' : 'Failed'));
 
         return redirect()->route('admin.fasilitas.index')
                          ->with('success', 'Fasilitas **' . $nama . '** berhasil dihapus.');

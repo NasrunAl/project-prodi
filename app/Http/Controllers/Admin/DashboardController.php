@@ -14,6 +14,7 @@ class DashboardController extends Controller
     {
         // Hitung data untuk kartu statistik
         $dosenCount          = Dosen::count();
+        $koordinatorCount    = Dosen::where('kategori', 'koordinator')->count();
         $fasilitasCount      = Fasilitas::count();
         $profilLulusanCount  = ProfilLulusan::count();
         $beritaCount         = Berita::count();
@@ -29,6 +30,7 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', compact(
             'dosenCount',
+            'koordinatorCount',
             'fasilitasCount',
             'profilLulusanCount',
             'beritaCount',

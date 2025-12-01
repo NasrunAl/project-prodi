@@ -38,6 +38,7 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-1">Kategori</label>
                     <select name="kategori" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white">
+                        <option value="koordinator">Koordinator Program Studi</option>
                         <option value="dosen">Dosen</option>
                         <option value="admin">Admin</option>
                         <option value="teknisi">Teknisi</option>

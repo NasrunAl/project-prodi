@@ -44,7 +44,9 @@
                 </td>
                 <td class="px-6 py-4">{{ $dosen->jabatan }}</td>
                 <td class="px-6 py-4">
-                    @if($dosen->kategori == 'dosen')
+                    @if($dosen->kategori == 'koordinator')
+                        <span class="bg-purple-900/50 text-purple-300 px-2 py-1 rounded text-xs border border-purple-800">Koordinator</span>
+                    @elseif($dosen->kategori == 'dosen')
                         <span class="bg-blue-900/50 text-blue-300 px-2 py-1 rounded text-xs border border-blue-800">Dosen</span>
                     @elseif($dosen->kategori == 'admin')
                         <span class="bg-red-900/50 text-red-300 px-2 py-1 rounded text-xs border border-red-800">Admin</span>

@@ -31,7 +31,7 @@ class DosenController extends Controller
             'nama' => 'required|string|max:255',
             'nip' => 'nullable|string|max:50',
             'jabatan' => 'required|string|max:100',
-            'kategori' => 'required|in:dosen,admin,teknisi',
+            'kategori' => 'required|in:koordinator,dosen,admin,teknisi',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Max 2MB
         ]);
 

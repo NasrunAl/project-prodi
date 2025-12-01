@@ -43,6 +43,7 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-1">Kategori</label>
                     <select name="kategori" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white">
+                        <option value="koordinator" {{ $dosen->kategori == 'koordinator' ? 'selected' : '' }}>Koordinator Program Studi</option>
                         <option value="dosen" {{ $dosen->kategori == 'dosen' ? 'selected' : '' }}>Dosen</option>
                         <option value="admin" {{ $dosen->kategori == 'admin' ? 'selected' : '' }}>Admin</option>
                         <option value="teknisi" {{ $dosen->kategori == 'teknisi' ? 'selected' : '' }}>Teknisi</option>

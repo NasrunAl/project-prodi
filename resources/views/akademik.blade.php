@@ -3,7 +3,7 @@
 @section('title', 'Akademik - Bisnis Digital')
 
 @section('content')
-<section class="py-20 px-4 bg-[#050511] relative overflow-hidden min-h-screen">
+<section class="py-20 px-4 bg-[#00092D] relative overflow-hidden min-h-screen">
     
     {{-- Background Glow --}}
     <div class="absolute top-0 left-0 w-96 h-96 bg-[#254E99] opacity-10 blur-[150px] rounded-full pointer-events-none"></div>
@@ -12,9 +12,9 @@
     <div class="max-w-7xl mx-auto relative z-10">
         
         {{-- Header Section --}}
-        <div class="text-center mb-16 mt-8">
-            <h2 class="text-4xl font-bold text-white mb-2">Profil Lulusan</h2>
-            <div class="h-1 w-24 bg-gradient-to-r from-[#c5a059] to-[#7C18B6] mx-auto rounded-full"></div>
+        <div class="text-center mb-20 mt-12">
+            <h2 class="text-5xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">Profil Lulusan</h2>
+            <div class="h-2 w-32 bg-gradient-to-r from-[#c5a059] to-[#7C18B6] mx-auto rounded-full shadow-lg"></div>
             <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
                 Lulusan Bisnis Digital dibekali dengan kompetensi teknis dan manajerial untuk bersaing di era global.
             </p>
@@ -25,7 +25,7 @@
             
             @foreach($profils as $profil)
             {{-- LOOPING CARD MULAI DARI SINI --}}
-            <div class="group relative rounded-2xl overflow-hidden h-72 border border-[#254E99]/30 bg-[#101025]">
+            <div class="group relative rounded-2xl overflow-hidden h-72 border-2 border-[#254E99]/40 bg-[#00092D] hover:border-[#7C18B6] transition duration-300 hover:shadow-[0_0_30px_rgba(197,160,89,0.15)] transform hover:-translate-y-2">
                 
                 {{-- Gambar Latar (Pakai Storage Link) --}}
                 @if($profil->ikon)
@@ -53,37 +53,52 @@
 
             {{-- JIKA DATA KOSONG --}}
             @if($profils->isEmpty())
-            <div class="col-span-2 text-center py-10 bg-[#101025] rounded-xl border border-dashed border-gray-700">
+            <div class="col-span-2 text-center py-16 bg-[#00092D] rounded-2xl border-2 border-dashed border-[#254E99]/40 hover:border-[#7C18B6] transition duration-300">
                 <p class="text-gray-500">Belum ada data profil lulusan.</p>
             </div>
             @endif
 
         </div>
 
-        {{-- DOWNLOAD SECTION (Tetap Sama) --}}
+        {{-- DOWNLOAD SECTION (Diubah total sesuai visual) --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {{-- Mata Kuliah --}}
-            <div class="bg-[#101025] border border-[#254E99]/30 rounded-3xl p-8 flex flex-col items-center text-center hover:border-[#c5a059] transition duration-300 group">
-                 <div class="w-16 h-16 bg-[#254E99]/20 rounded-full flex items-center justify-center mb-6 group-hover:bg-[#c5a059]/20 transition">
-                    <i class="fas fa-book text-3xl text-[#4B7BEC] group-hover:text-[#c5a059] transition"></i>
-                 </div>
-                 <h3 class="font-bold text-2xl text-white mb-4">Mata Kuliah</h3>
-                 <p class="text-gray-400 text-sm mb-6">Unduh daftar mata kuliah lengkap yang akan dipelajari selama masa studi.</p>
-                 <button class="w-full py-3 rounded-full bg-transparent border border-[#4B7BEC] text-[#4B7BEC] font-bold hover:bg-[#4B7BEC] hover:text-white transition duration-300 flex items-center justify-center gap-2">
+            
+            {{-- BOX 1: Kurikulum --}}
+            <div class="relative rounded-3xl p-6 flex flex-col items-center text-center shadow-2xl overflow-hidden h-[350px] transform hover:scale-[1.01] transition duration-300">
+                
+                {{-- BACKGROUND GRADIENT (Mengikuti visual ungu ke biru) --}}
+                <div class="absolute inset-0 bg-gradient-to-br from-[#7C18B6] to-[#254E99] opacity-90"></div>
+                
+                {{-- Ikon --}}
+                <div class="relative w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6 mt-8">
+                    <i class="fas fa-graduation-cap text-4xl text-white"></i>
+                </div>
+                
+                <h3 class="relative font-bold text-3xl text-white mb-6 drop-shadow-md">Kurikulum</h3>
+                
+                {{-- Tombol Unduh PDF (Outline Emas) --}}
+                <a href="#" class="relative w-full py-3 rounded-full bg-transparent border-2 border-[#c5a059] text-[#c5a059] font-bold hover:bg-[#c5a059] hover:text-[#00092D] transition duration-300 flex items-center justify-center gap-2 max-w-xs">
                     <i class="fas fa-download"></i> Unduh PDF
-                 </button>
+                </a>
             </div>
 
-            {{-- Kurikulum --}}
-            <div class="bg-[#101025] border border-[#254E99]/30 rounded-3xl p-8 flex flex-col items-center text-center hover:border-[#7C18B6] transition duration-300 group">
-                 <div class="w-16 h-16 bg-[#7C18B6]/20 rounded-full flex items-center justify-center mb-6">
-                    <i class="fas fa-graduation-cap text-3xl text-[#7C18B6] group-hover:scale-110 transition"></i>
-                 </div>
-                 <h3 class="font-bold text-2xl text-white mb-4">Kurikulum</h3>
-                 <p class="text-gray-400 text-sm mb-6">Pelajari struktur kurikulum berbasis industri dan peta jalan pembelajaran.</p>
-                 <button class="w-full py-3 rounded-full bg-transparent border border-[#7C18B6] text-[#7C18B6] font-bold hover:bg-[#7C18B6] hover:text-white transition duration-300 flex items-center justify-center gap-2">
+            {{-- BOX 2: Mata Kuliah --}}
+            <div class="relative rounded-3xl p-6 flex flex-col items-center text-center shadow-2xl overflow-hidden h-[350px] transform hover:scale-[1.01] transition duration-300">
+                
+                {{-- BACKGROUND GRADIENT (Mengikuti visual biru ke ungu) --}}
+                <div class="absolute inset-0 bg-gradient-to-br from-[#254E99] to-[#7C18B6] opacity-90"></div>
+                
+                {{-- Ikon --}}
+                <div class="relative w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6 mt-8">
+                    <i class="fas fa-book-open text-4xl text-white"></i>
+                </div>
+                
+                <h3 class="relative font-bold text-3xl text-white mb-6 drop-shadow-md">Mata Kuliah</h3>
+                
+                {{-- Tombol Unduh PDF (Outline Emas) --}}
+                <a href="#" class="relative w-full py-3 rounded-full bg-transparent border-2 border-[#c5a059] text-[#c5a059] font-bold hover:bg-[#c5a059] hover:text-[#00092D] transition duration-300 flex items-center justify-center gap-2 max-w-xs">
                     <i class="fas fa-download"></i> Unduh PDF
-                 </button>
+                </a>
             </div>
         </div>
     </div>

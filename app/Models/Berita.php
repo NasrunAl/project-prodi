@@ -2,22 +2,47 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Berita extends Model
 {
-    // Nama tabel spesifik untuk model ini
+    use HasFactory;
+
     protected $table = 'beritas';
 
-    // $fillable untuk mengizinkan mass assignment hanya pada kolom yang aman
     protected $fillable = [
         'judul',
-        'slug',      // kalau ada
-        'konten',    // atau 'isi'
-        'gambar',    // path file
-        'excerpt',   // ringkasan / optional
-        'user_id',   // penulis, jika ada
         'penulis',
-        // tambahkan kolom lain yang akan diisi lewat mass-assignment
+        'slug',
+        'konten',
+        'gambar',
+        'excerpt',
+        'user_id',
     ];
+
+    /**
+     * Relationship dengan User model
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the previous berita
+     */
+    public function previous()
+    {
+        return static::where('id', '<', $this->id)->orderBy('id', 'desc')->first();
+    }
+
+    /**
+     * Get the next berita
+     */
+    public function next()
+    {
+        return static::where('id', '>', $this->id)->orderBy('id', 'asc')->first();
+    }
 }

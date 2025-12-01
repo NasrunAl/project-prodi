@@ -31,10 +31,10 @@
                 {{-- Gambar --}}
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-1">Gambar Utama</label>
-                    <input type="file" name="gambar" required class="w-full text-sm text-gray-400
+                    <input type="file" name="gambar" class="w-full text-sm text-gray-400
                       file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
                       file:bg-indigo-900 file:text-indigo-300 hover:file:bg-indigo-800">
-                    <p class="text-xs text-gray-500 mt-1">Wajib, Maks 5MB. (Akan tampil di slider)</p>
+                    <p class="text-xs text-gray-500 mt-1">Opsional, Maks 5MB. (Akan tampil di slider)</p>
                 </div>
             </div>
 

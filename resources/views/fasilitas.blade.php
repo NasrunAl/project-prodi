@@ -51,7 +51,7 @@
 </div>
 
 {{-- 2. INTRO TEXT --}}
-<section class="py-16 px-6 bg-[#050511] text-center relative">
+<section class="py-16 px-6 bg-[#00092D] text-center relative">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[#254E99] to-transparent opacity-50"></div>
     <div class="max-w-3xl mx-auto">
         <h2 class="text-3xl font-bold mb-6 text-white">Sarana Pembelajaran <span class="text-[#7C18B6]">Modern</span></h2>
@@ -64,7 +64,7 @@
 
 
 {{-- 3. GALLERY GRID (Dinamis dari Database) --}}
-<section class="pb-24 px-4 max-w-7xl mx-auto bg-[#050511]">
+<section class="pb-24 px-4 max-w-7xl mx-auto bg-[#00092D]">
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($fasilitas as $item)

@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\FasilitasController as AdminFasilitasController; // admin controller aliased to avoid name clash with public controller
 
 // ROUTE UTAMA HOME
-Route::get('/', [HomeController::class, 'index']); 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/akademik', function () {
     $profils = \App\Models\ProfilLulusan::orderBy('urutan', 'asc')->get();
@@ -25,9 +25,14 @@ Route::get('/fasilitas', [FasilitasController::class, 'index'])->name('fasilitas
 
 // Halaman Berita Publik
 Route::get('/berita', function () {
-    $beritas = \App\Models\Berita::latest()->paginate(10); 
+    $beritas = \App\Models\Berita::latest()->paginate(10);
     return view('berita.index', compact('beritas'));
 })->name('berita.index');
+
+// Halaman Detail Berita
+Route::get('/berita/{berita}', function (\App\Models\Berita $berita) {
+    return view('berita.show', compact('berita'));
+})->name('berita.show');
 
 // Halaman Civitas Publik
 Route::get('/civitas', [CivitasController::class, 'index'])->name('civitas');

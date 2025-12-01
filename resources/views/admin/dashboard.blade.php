@@ -13,7 +13,7 @@
         </div>
 
         <div class="flex gap-2">
-            <a href="#" class="hidden md:inline-flex items-center px-3 py-2 rounded-md text-xs font-semibold
+            <a href="{{ route('admin.berita.create') }}" class="inline-flex items-center px-3 py-2 rounded-md text-xs font-semibold
                               bg-indigo-600 hover:bg-indigo-500">
                 <i class="fa-solid fa-plus mr-2"></i> Tambah Berita
             </a>
@@ -25,14 +25,23 @@
     </div>
 
     {{-- KARTU STATISTIK --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 mb-8">
+        <div class="bg-gray-950 border border-gray-800 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-xs uppercase text-gray-400">Koordinator</span>
+                <i class="fa-solid fa-crown text-purple-400"></i>
+            </div>
+            <p class="text-3xl font-bold">{{ $koordinatorCount }}</p>
+            <p class="text-xs text-gray-500 mt-1">Koordinator Program Studi</p>
+        </div>
+
         <div class="bg-gray-950 border border-gray-800 rounded-xl p-4">
             <div class="flex items-center justify-between mb-2">
                 <span class="text-xs uppercase text-gray-400">Civitas</span>
                 <i class="fa-solid fa-user-tie text-indigo-400"></i>
             </div>
             <p class="text-3xl font-bold">{{ $dosenCount }}</p>
-            <p class="text-xs text-gray-500 mt-1">Total dosen terdaftar</p>
+            <p class="text-xs text-gray-500 mt-1">Total civitas terdaftar</p>
         </div>
 
         <div class="bg-gray-950 border border-gray-800 rounded-xl p-4">
