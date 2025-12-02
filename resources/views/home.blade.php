@@ -1,28 +1,31 @@
 @extends('layouts.main')
 
 @section('content')
+    {{-- Pustaka CSS untuk slider Swiper.js --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        /* Fix Pagination Swiper */
+        /* Kustomisasi untuk indikator paginasi Swiper */
         .swiper-pagination-bullet { background-color: #4B7BEC; opacity: 0.4; }
         .swiper-pagination-bullet-active { background-color: #7C18B6 !important; opacity: 1; width: 25px; border-radius: 5px; transition: all 0.3s; }
         
-        /* Custom Scrollbar untuk Modal */
+        /* Kustomisasi scrollbar (jika diperlukan untuk modal atau elemen lain) */
         .custom-scrollbar::-webkit-scrollbar { width: 8px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #00092D; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #7C18B6; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #4B7BEC; }
     </style>
 
-    {{-- HERO SECTION --}}
-    <section class="relative h-[520px] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('images/kampus-bg.png') }}');"></div>
+    {{-- HERO SECTION: Bagian pembuka halaman yang memenuhi seluruh layar --}}
+    <section class="relative h-screen flex items-center justify-center overflow-hidden -mt-24">
+        {{-- Latar belakang dengan gambar dan gradient overlay --}}
+        <div class="absolute inset-0 z-0 pt-24">
+            <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('images/kampus-bg.jpg') }}');"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-[#00092D]/60 to-[#00092D]"></div>
         </div>
 
+        {{-- Konten di atas latar belakang (teks dan logo) --}}
         <div class="relative z-10 px-6 max-w-6xl mx-auto flex items-center justify-between gap-12">
-            <div class="text-left font-[Times New Roman] flex-1">
+            <div class="text-left font-[Times New Roman] flex-1"> {{-- flex-1 membuat elemen ini mengambil sisa ruang --}}
                 <h2 class="text-lg tracking-[0.3em] mb-4 text-[#c5a059] font-semibold uppercase">Program Studi</h2>
                 <h1 id="typingText" class="text-7xl md:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-lg"></h1>
                 <h3 class="text-2xl font-semibold text-gray-100 mb-2">Politeknik Negeri Jember</h3>
@@ -34,11 +37,11 @@
         </div>
     </section>
 
-{{-- SLIDER PROFIL / VISI MISI / TUJUAN (Menggunakan Alpine.js) --}}
+{{-- SLIDER PROFIL / VISI MISI / TUJUAN: Dibuat dengan Alpine.js untuk interaktivitas --}}
 <section class="py-24 bg-[#00092D] relative overflow-hidden"
-    x-data="{
+    x-data="{ {{-- Inisialisasi state Alpine.js --}}
         slide: 0,
-        slides: 3,
+        slides: 3, // Jumlah total slide
         auto() { setInterval(() => { this.slide = (this.slide + 1) % this.slides; }, 6000); }
     }"
     x-init="auto()">
@@ -49,14 +52,14 @@
 
     <div class="max-w-5xl mx-auto px-6 relative z-10">
 
-        {{-- Container Utama dengan Efek Glassmorphism --}}
+        {{-- Container Utama dengan Efek Glassmorphism (latar belakang transparan blur) --}}
         <div class="bg-[#00092D]/60 backdrop-blur-xl border border-[#254E99]/30 rounded-3xl shadow-2xl overflow-hidden relative">
             
             {{-- Dekorasi Garis Atas --}}
             <div class="h-1 w-full bg-gradient-to-r from-transparent via-[#7C18B6] to-transparent opacity-70"></div>
 
             <div class="py-16 px-4 md:px-12">
-                
+
                 {{-- WRAPPER SLIDER --}}
                 <div class="overflow-hidden">
                     <div class="flex transition-transform duration-700 ease-in-out" 
@@ -64,7 +67,7 @@
 
                         {{-- SLIDE 1: PROFIL --}}
                         <div class="min-w-full px-4 flex flex-col items-center text-center">
-                            <div class="mb-8 relative group">
+                            <div class="mb-8 relative group"> {{-- 'group' untuk efek hover pada elemen anak --}}
                                 <div class="absolute inset-0 bg-[#c5a059] blur-xl opacity-40 group-hover:opacity-60 transition duration-500 rounded-full"></div>
                                 <div class="relative w-32 h-32 bg-[#00092D] border-3 border-[#c5a059] rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(197,160,89,0.3)]">
                                     <img src="{{ asset('images/logo-bsd.png') }}" alt="Logo" class="w-16 object-contain">
@@ -150,7 +153,7 @@
                 {{-- Navigation Dots (Indikator) --}}
                 <div class="flex justify-center mt-12 space-x-3">
                     <template x-for="i in slides">
-                        <button @click="slide = i - 1" 
+                        <button @click="slide = i - 1"  {{-- Tombol untuk pindah slide --}}
                             class="h-2 rounded-full transition-all duration-500 ease-out"
                             :class="slide === (i - 1) ? 'w-12 bg-[#c5a059] shadow-[0_0_10px_#c5a059]' : 'w-2 bg-gray-600 hover:bg-gray-400'">
                         </button>
@@ -162,7 +165,7 @@
     </div>
 </section>
 
-{{-- AKREDITASI SECTION --}}
+{{-- AKREDITASI SECTION: Menampilkan informasi akreditasi dengan desain menarik --}}
 <section class="py-24 bg-[#00092D] relative overflow-hidden">
     
     {{-- Background Glow (Emas Samar di Kiri, Biru di Kanan) --}}
@@ -172,7 +175,7 @@
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16 relative z-10">
 
         {{-- BAGIAN KIRI: Tampilan Sertifikat --}}
-        <div class="w-full md:w-1/2 relative group">
+        <div class="w-full md:w-1/2 relative group"> {{-- 'group' untuk efek hover --}}
             {{-- Efek Glow di belakang gambar --}}
             <div class="absolute inset-0 bg-gradient-to-r from-[#c5a059] to-[#7C18B6] rounded-xl blur-xl opacity-40 group-hover:opacity-60 transition duration-500 transform rotate-3 group-hover:rotate-6"></div>
             
@@ -227,7 +230,7 @@
 </section>
 
 
-    {{-- BERITA / BSD TERKINI DINAMIS + MODAL QUICK VIEW --}}
+{{-- BERITA / BSD TERKINI: Menampilkan berita terbaru dari database dalam bentuk slider --}}
 <section class="py-16 bg-[#00092D] relative">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-3/4 bg-[#254E99] opacity-10 blur-[100px] rounded-full pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-6 relative z-10">
@@ -236,7 +239,7 @@
             <div class="h-1 w-20 bg-gradient-to-r from-[#254E99] to-[#7C18B6] mx-auto rounded-full"></div>
         </div>
         
-        {{-- CEK APAKAH ADA BERITA (PENTING) --}}
+        {{-- Kondisi untuk mengecek apakah ada data berita. Jika tidak, tampilkan pesan. --}}
         @if($beritasTerkini->isEmpty())
             <p class="text-center text-gray-500 py-10">Belum ada berita terbaru yang diterbitkan. Silakan tambahkan dari Admin Dashboard.</p>
         @else
@@ -248,7 +251,7 @@
                 @foreach($beritasTerkini as $berita)
                 <div class="swiper-slide !h-auto"> 
                     <div class="bg-[#00092D] border border-[#254E99]/30 rounded-2xl overflow-hidden shadow-lg group hover:-translate-y-1 transition-transform duration-300">
-                        <div class="h-52 w-full overflow-hidden relative bg-gray-800">
+                        <div class="h-52 w-full overflow-hidden relative bg-gray-800"> {{-- Tinggi tetap untuk konsistensi --}}
                             {{-- GAMBAR DARI DATABASE (Gunakan 'storage/') --}}
                             <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" 
                                  onerror="this.onerror=null; this.src='{{ asset('images/placeholder-news.png') }}';" {{-- FALLBACK AMAN JIKA FILE HILANG --}}
@@ -260,7 +263,7 @@
                         </div>
                         
                         <div class="p-5">
-                            <h3 class="text-white font-bold text-lg leading-snug mb-4 line-clamp-2 group-hover:text-[#4B7BEC] transition-colors">
+                            <h3 class="text-white font-bold text-lg leading-snug mb-4 line-clamp-2 group-hover:text-[#4B7BEC] transition-colors"> {{-- line-clamp-2 membatasi judul jadi 2 baris --}}
                                 {{ $berita->judul }} {{-- JUDUL DARI DB --}}
                             </h3>
                             
@@ -285,16 +288,18 @@
     </div> {{-- tutup .max-w-7xl --}}
 </section>
 
-{{-- SCRIPT DILETAKKAN DI BAGIAN BAWAH CONTENT AGAR TIDAK MENGGANGGU LAYOUT --}}
+{{-- SCRIPT: Diletakkan di bagian bawah agar tidak memblokir rendering halaman --}}
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
 <script>
+    // Inisialisasi Swiper.js untuk slider berita
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         spaceBetween: 24,
         pagination: { el: ".swiper-pagination", clickable: true, dynamicBullets: true },
-        breakpoints: { 640: { slidesPerView: 2 }, 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } }
+        // Pengaturan responsif: jumlah slide yang terlihat berdasarkan lebar layar
+        breakpoints: { 640: { slidesPerView: 2 }, 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } } 
     });
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -302,6 +307,7 @@
         const speed = 80;
         let i = 0;
         function typeWriter() {
+            // Fungsi untuk membuat efek teks mengetik pada hero section
             if (i < text.length) {
                 const el = document.getElementById("typingText");
                 if(el) { el.innerHTML += text.charAt(i); }

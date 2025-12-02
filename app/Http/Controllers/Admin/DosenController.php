@@ -9,21 +9,34 @@ use Illuminate\Support\Facades\Storage;
 
 class DosenController extends Controller
 {
-    // 1. TAMPILKAN DAFTAR DOSEN (READ)
+    /**
+     * Menampilkan halaman utama yang berisi daftar semua data civitas (dosen, admin, teknisi).
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
-        // Mengambil semua data dosen, diurutkan dari yang terbaru
+        // Mengambil semua data dari model Dosen, diurutkan dari yang terbaru dibuat.
         $dosens = Dosen::latest()->get();
         return view('admin.dosen.index', compact('dosens'));
     }
 
-    // 2. TAMPILKAN FORM TAMBAH (CREATE)
+    /**
+     * Menampilkan form untuk menambahkan data civitas baru.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         return view('admin.dosen.create');
     }
 
-    // 3. SIMPAN DATA KE DATABASE (STORE)
+    /**
+     * Menyimpan data civitas baru yang dikirim dari form 'create' ke dalam database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         // Validasi Input
@@ -35,14 +48,14 @@ class DosenController extends Controller
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Max 2MB
         ]);
 
-        // Upload Foto jika ada
+        // Proses upload foto jika pengguna mengunggah file.
         $fotoPath = null;
         if ($request->hasFile('foto')) {
-            // Simpan file di folder 'storage/app/public/dosen-images'
+            // Simpan file di 'storage/app/public/dosen-images' dan dapatkan path-nya.
             $fotoPath = $request->file('foto')->store('dosen-images', 'public');
         }
 
-        // Simpan ke Database
+        // Buat record baru di tabel 'dosens' menggunakan data dari request.
         Dosen::create([
             'nama' => $request->nama,
             'nip' => $request->nip,
@@ -51,17 +64,29 @@ class DosenController extends Controller
             'foto' => $fotoPath,
         ]);
 
+        // Arahkan kembali ke halaman index dengan pesan sukses.
         return redirect()->route('admin.dosen.index')->with('success', 'Data berhasil ditambahkan!');
     }
 
-    // 4. TAMPILKAN FORM EDIT (EDIT)
+    /**
+     * Menampilkan form untuk mengedit data civitas yang sudah ada.
+     *
+     * @param  string  $id
+     * @return \Illuminate\View\View
+     */
     public function edit($id)
     {
         $dosen = Dosen::findOrFail($id);
         return view('admin.dosen.edit', compact('dosen'));
     }
 
-    // 5. PROSES UPDATE DATA (UPDATE)
+    /**
+     * Memperbarui data civitas di database berdasarkan ID.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         $dosen = Dosen::findOrFail($id);
@@ -75,20 +100,20 @@ class DosenController extends Controller
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Cek jika ada upload foto baru
+        // Cek jika ada file foto baru yang diunggah.
         if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada
+            // Hapus foto lama dari storage untuk menghemat ruang.
             if ($dosen->foto && Storage::disk('public')->exists($dosen->foto)) {
                 Storage::disk('public')->delete($dosen->foto);
             }
-            // Simpan foto baru
+            // Simpan foto baru dan perbarui path-nya.
             $fotoPath = $request->file('foto')->store('dosen-images', 'public');
         } else {
-            // Pertahankan foto lama jika tidak ada upload baru
+            // Jika tidak ada foto baru, gunakan path foto yang lama.
             $fotoPath = $dosen->foto;
         }
 
-        // Update Data
+        // Perbarui record di database.
         $dosen->update([
             'nama' => $request->nama,
             'nip' => $request->nip,
@@ -100,17 +125,22 @@ class DosenController extends Controller
         return redirect()->route('admin.dosen.index')->with('success', 'Data berhasil diperbarui!');
     }
 
-    // 6. HAPUS DATA (DESTROY)
+    /**
+     * Menghapus data civitas dari database dan file foto terkait dari storage.
+     *
+     * @param  string  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         $dosen = Dosen::findOrFail($id);
         
-        // Hapus foto fisik jika ada
+        // Hapus file foto dari storage sebelum menghapus record database.
         if ($dosen->foto) {
             Storage::disk('public')->delete($dosen->foto);
         }
 
-        $dosen->delete();
+        $dosen->delete(); // Hapus record dari tabel.
         return redirect()->back()->with('success', 'Data berhasil dihapus!');
     }
 }

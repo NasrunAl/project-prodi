@@ -17,10 +17,6 @@
                               bg-indigo-600 hover:bg-indigo-500">
                 <i class="fa-solid fa-plus mr-2"></i> Tambah Berita
             </a>
-            <a href="#" class="hidden md:inline-flex items-center px-3 py-2 rounded-md text-xs font-semibold
-                              bg-gray-800 hover:bg-gray-700">
-                <i class="fa-solid fa-gears mr-2"></i> Pengaturan
-            </a>
         </div>
     </div>
 

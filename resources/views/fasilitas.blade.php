@@ -21,13 +21,16 @@
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-[#050511] via-[#050511]/20 to-transparent"></div>
                 
-                <div class="absolute bottom-20 left-0 right-0 text-center z-20 px-4">
-                    {{-- DESKRIPSI SINGKAT ATAU IKON FA SEBAGAI SUBTITLE --}}
-                    <span class="text-[#c5a059] tracking-[0.3em] text-sm font-bold uppercase mb-3 block animate-fadeIn">
-                        {{ $item->deskripsi ?? 'Fasilitas Program Studi' }}
-                    </span>
-                    {{-- NAMA FASILITAS SEBAGAI JUDUL --}}
-                    <h1 class="text-4xl md:text-6xl font-bold text-white drop-shadow-2xl">{{ $item->nama }}</h1>
+                {{-- Kontainer untuk membatasi lebar konten agar sama dengan halaman Home --}}
+                <div class="absolute bottom-20 left-0 right-0 z-20 px-4">
+                    <div class="max-w-6xl mx-auto text-center">
+                        {{-- DESKRIPSI SINGKAT ATAU IKON FA SEBAGAI SUBTITLE --}}
+                        <span class="text-[#c5a059] tracking-[0.3em] text-sm font-bold uppercase mb-3 block animate-fadeIn">
+                            {{ $item->deskripsi ?? 'Fasilitas Program Studi' }}
+                        </span>
+                        {{-- NAMA FASILITAS SEBAGAI JUDUL --}}
+                        <h1 class="text-4xl md:text-6xl font-bold text-white drop-shadow-2xl">{{ $item->nama }}</h1>
+                    </div>
                 </div>
             </div>
             @empty
