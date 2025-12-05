@@ -55,7 +55,7 @@
                             {{ $berita->judul }}
                         </h2>
 
-                        <p class="text-gray-400 text-sm mb-4 line-clamp-3">
+                        <p class="text-gray-400 text-base mb-4 line-clamp-3">
                             {{ Str::limit(strip_tags($berita->konten), 150) }}
                         </p>
 

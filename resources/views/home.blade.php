@@ -9,8 +9,9 @@
         .swiper-pagination-bullet-active { background-color: #7C18B6 !important; opacity: 1; width: 25px; border-radius: 5px; transition: all 0.3s; }
         
         /* Kustomisasi scrollbar (jika diperlukan untuk modal atau elemen lain) */
+        /* Background scrollbar diubah ke warna baru */
         .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #00092D; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #DBE1F7; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #7C18B6; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #4B7BEC; }
     </style>
@@ -20,16 +21,17 @@
         {{-- Latar belakang dengan gambar dan gradient overlay --}}
         <div class="absolute inset-0 z-0 pt-24">
             <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('images/kampus-bg.jpg') }}');"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-[#00092D]/60 to-[#00092D]"></div>
+            {{-- Gradien diubah ke warna gelap yang lain agar teks putih di atasnya kontras --}}
+            <div class="absolute inset-0 bg-gradient-to-b from-[#001f3f]/60 to-[#001f3f]"></div>
         </div>
 
         {{-- Konten di atas latar belakang (teks dan logo) --}}
         <div class="relative z-10 px-6 max-w-6xl mx-auto flex items-center justify-between gap-12">
             <div class="text-left font-[Times New Roman] flex-1"> {{-- flex-1 membuat elemen ini mengambil sisa ruang --}}
-                <h2 class="text-lg tracking-[0.3em] mb-4 text-[#c5a059] font-semibold uppercase">Program Studi</h2>
+                <h1 class="text-3xl tracking-[0.3em] mb-4 text-[#c5a059] font-semibold uppercase">Program Studi</h1>
                 <h1 id="typingText" class="text-7xl md:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-lg"></h1>
-                <h3 class="text-2xl font-semibold text-gray-100 mb-2">Politeknik Negeri Jember</h3>
-                <p class="text-base text-gray-300 tracking-wider">Kampus 2 Bondowoso</p>
+                <h2 class="text-4xl font-semibold text-gray-100 mb-2">Politeknik Negeri Jember</h2>
+                <p class="text-2xl text-gray-300 tracking-wider">Kampus 2 Bondowoso</p>
             </div>
             <div>
                 <img src="{{ asset('images/logo-bsd.png') }}" class="w-64">
@@ -38,7 +40,8 @@
     </section>
 
 {{-- SLIDER PROFIL / VISI MISI / TUJUAN: Dibuat dengan Alpine.js untuk interaktivitas --}}
-<section class="py-24 bg-[#00092D] relative overflow-hidden"
+{{-- Background diubah ke warna baru --}}
+<section class="py-24 bg-[#DBE1F7] relative overflow-hidden"
     x-data="{ {{-- Inisialisasi state Alpine.js --}}
         slide: 0,
         slides: 3, // Jumlah total slide
@@ -53,7 +56,8 @@
     <div class="max-w-5xl mx-auto px-6 relative z-10">
 
         {{-- Container Utama dengan Efek Glassmorphism (latar belakang transparan blur) --}}
-        <div class="bg-[#00092D]/60 backdrop-blur-xl border border-[#254E99]/30 rounded-3xl shadow-2xl overflow-hidden relative">
+        {{-- Background container diubah ke warna gelap untuk kontras dengan latar belakang terang --}}
+        <div class="bg-[#001f3f]/60 backdrop-blur-xl border border-[#254E99]/30 rounded-3xl shadow-2xl overflow-hidden relative">
             
             {{-- Dekorasi Garis Atas --}}
             <div class="h-1 w-full bg-gradient-to-r from-transparent via-[#7C18B6] to-transparent opacity-70"></div>
@@ -69,7 +73,8 @@
                         <div class="min-w-full px-4 flex flex-col items-center text-center">
                             <div class="mb-8 relative group"> {{-- 'group' untuk efek hover pada elemen anak --}}
                                 <div class="absolute inset-0 bg-[#c5a059] blur-xl opacity-40 group-hover:opacity-60 transition duration-500 rounded-full"></div>
-                                <div class="relative w-32 h-32 bg-[#00092D] border-3 border-[#c5a059] rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(197,160,89,0.3)]">
+                                {{-- Background logo diubah ke warna gelap yang lain --}}
+                                <div class="relative w-32 h-32 bg-[#001f3f] border-3 border-[#c5a059] rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(197,160,89,0.3)]">
                                     <img src="{{ asset('images/logo-bsd.png') }}" alt="Logo" class="w-16 object-contain">
                                 </div>
                             </div>
@@ -78,7 +83,7 @@
                                 Profil Prodi
                             </h2>
                             
-                            <p class="leading-relaxed text-gray-300 text-lg max-w-3xl mx-auto">
+                            <p class="leading-relaxed text-gray-300 text-2xl max-w-1xl mx-auto">
                                 "Program Studi Sarjana Terapan Bisnis Digital hadir sebagai jawaban atas tantangan era revolusi industri 4.0. 
                                 Kami berkomitmen mencetak talenta digital yang tidak hanya paham teknologi, tetapi juga memiliki ketajaman bisnis 
                                 yang mumpuni untuk bersaing di kancah global."
@@ -89,24 +94,27 @@
                         <div class="min-w-full px-4 flex flex-col items-center">
                              <div class="mb-8 relative group">
                                 <div class="absolute inset-0 bg-[#7C18B6] blur-xl opacity-40 group-hover:opacity-60 transition duration-500 rounded-full"></div>
-                                <div class="relative w-32 h-32 bg-[#00092D] border-3 border-[#7C18B6] rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(124,24,182,0.4)]">
+                                {{-- Background logo diubah ke warna gelap yang lain --}}
+                                <div class="relative w-32 h-32 bg-[#001f3f] border-3 border-[#7C18B6] rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(124,24,182,0.4)]">
                                     <img src="{{ asset('images/logo-bsd.png') }}" alt="Logo" class="w-16 object-contain">
                                 </div>
                             </div>
 
-                            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white">Visi & Misi</h2>
+                            <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">Visi & Misi</h2>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl text-left">
-                                <div class="bg-[#00092D] p-7 rounded-2xl border border-[#254E99]/50 hover:border-[#7C18B6] transition duration-300 hover:shadow-[0_0_20px_rgba(124,24,182,0.1)] hover:scale-105 transform">
-                                    <h3 class="text-xl font-bold text-[#c5a059] mb-3 border-b border-gray-700 pb-2">Visi</h3>
-                                    <p class="text-gray-300 italic">
+                                {{-- Background card diubah ke warna gelap yang lain --}}
+                                <div class="bg-[#001f3f] p-7 rounded-2xl border border-[#254E99]/50 hover:border-[#7C18B6] transition duration-300 hover:shadow-[0_0_20px_rgba(124,24,182,0.1)] hover:scale-105 transform">
+                                    <h3 class="text-2xl font-bold text-[#c5a059] mb-3 border-b border-gray-700 pb-2">Visi</h3>
+                                    <p class="text-gray-300 italic text-2xl">
                                         "Menjadi program studi unggul dalam pengembangan bisnis digital yang inovatif, adaptif, dan berdaya saing internasional pada tahun 2030."
                                     </p>
                                 </div>
 
-                                <div class="bg-[#00092D] p-7 rounded-2xl border border-[#254E99]/50 hover:border-[#7C18B6] transition duration-300 hover:shadow-[0_0_20px_rgba(124,24,182,0.1)] hover:scale-105 transform">
+                                {{-- Background card diubah ke warna gelap yang lain --}}
+                                <div class="bg-[#001f3f] p-7 rounded-2xl border border-[#254E99]/50 hover:border-[#7C18B6] transition duration-300 hover:shadow-[0_0_20px_rgba(124,24,182,0.1)] hover:scale-105 transform">
                                     <h3 class="text-xl font-bold text-[#c5a059] mb-4 border-b border-gray-700 pb-3">Misi</h3>
-                                    <ul class="space-y-2 text-gray-300 text-sm">
+                                    <ul class="space-y-2 text-gray-300 text-xl">
                                         <li class="flex items-start gap-2">
                                             <i class="fas fa-check-circle text-[#7C18B6] mt-1"></i>
                                             <span>Menyelenggarakan pendidikan vokasi berkualitas.</span>
@@ -128,16 +136,17 @@
                         <div class="min-w-full px-4 flex flex-col items-center text-center">
                              <div class="mb-8 relative group">
                                 <div class="absolute inset-0 bg-[#4B7BEC] blur-xl opacity-40 group-hover:opacity-60 transition duration-500 rounded-full"></div>
-                                <div class="relative w-28 h-28 bg-[#0a1a33] border-2 border-[#4B7BEC] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(75,123,236,0.3)]">
+                                {{-- Background logo diubah ke warna gelap yang lain --}}
+                                <div class="relative w-28 h-28 bg-[#001f3f] border-2 border-[#4B7BEC] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(75,123,236,0.3)]">
                                     <img src="{{ asset('images/logo-bsd.png') }}" alt="Logo" class="w-16 object-contain">
                                 </div>
                             </div>
 
-                            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Tujuan Kami</h2>
+                            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Tujuan Kami</h2>
                             
                             <div class="max-w-3xl mx-auto space-y-4">
-                                <p class="leading-relaxed text-gray-300 text-lg">
-                                    Melahirkan **Digital Entrepreneur** yang tangguh dan etis, serta tenaga profesional yang mampu merancang strategi bisnis berbasis data.
+                                <p class="leading-relaxed text-gray-300 text-2xl">
+                                    Melahirkan Digital Entrepreneur yang tangguh dan etis, serta tenaga profesional yang mampu merancang strategi bisnis berbasis data.
                                 </p>
                                 <div class="flex flex-wrap justify-center gap-4 mt-6">
                                     <span class="px-4 py-2 rounded-full bg-[#254E99]/20 border border-[#254E99] text-[#4B7BEC] text-sm font-semibold">Profesional</span>
@@ -166,7 +175,8 @@
 </section>
 
 {{-- AKREDITASI SECTION: Menampilkan informasi akreditasi dengan desain menarik --}}
-<section class="py-24 bg-[#00092D] relative overflow-hidden">
+{{-- Background diubah ke warna baru --}}
+<section class="py-24 bg-[#DBE1F7] relative overflow-hidden">
     
     {{-- Background Glow (Emas Samar di Kiri, Biru di Kanan) --}}
     <div class="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-[#c5a059] opacity-10 blur-[150px] rounded-full pointer-events-none"></div>
@@ -188,7 +198,8 @@
                 </div>
                 
                 {{-- Badge Status (Hiasan) --}}
-                <div class="absolute -top-6 -right-6 bg-[#c5a059] text-[#050511] w-20 h-20 rounded-full flex items-center justify-center font-bold shadow-[0_0_20px_rgba(197,160,89,0.5)] animate-pulse">
+                {{-- Warna teks diubah ke warna gelap --}}
+                <div class="absolute -top-6 -right-6 bg-[#c5a059] text-[#001f3f] w-20 h-20 rounded-full flex items-center justify-center font-bold shadow-[0_0_20px_rgba(197,160,89,0.5)] animate-pulse">
                     <div class="text-center text-xs leading-tight">
                         TERAKREDITASI<br><span class="text-sm">BAIK SEKALI</span>
                     </div>
@@ -198,11 +209,13 @@
 
         {{-- BAGIAN KANAN: Teks & Tombol --}}
         <div class="w-full md:w-1/2 text-center md:text-left">
-            <h3 class="text-[#c5a059] font-bold tracking-widest text-sm mb-2 uppercase">Penjaminan Mutu</h3>
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            <h3 class="text-[#c5a059] font-bold tracking-widest text-lg mb-2 uppercase">Penjaminan Mutu</h3>
+            {{-- Warna teks diubah ke warna gelap --}}
+            <h2 class="text-4xl md:text-5xl font-bold text-[#001f3f] mb-6 leading-tight">
                 Akreditasi Program Studi
             </h2>
-            <p class="text-gray-400 mb-8 leading-relaxed text-lg">
+            {{-- Warna teks diubah ke warna gelap --}}
+            <p class="text-gray-700 mb-8 leading-relaxed text-2xl">
                 Program studi kami telah terakreditasi resmi, menjamin standar kualitas pendidikan yang unggul dan diakui secara nasional. Komitmen kami untuk mencetak lulusan berkualitas.
             </p>
 
@@ -221,7 +234,8 @@
                 </span>
             </a>
             
-            <p class="mt-4 text-xs text-gray-500">
+            {{-- Warna teks diubah ke warna gelap --}}
+            <p class="mt-4 text-lg text-gray-700">
                 *Klik tombol di atas untuk menyimpan dokumen PDF
             </p>
         </div>
@@ -231,17 +245,19 @@
 
 
 {{-- BERITA / BSD TERKINI: Menampilkan berita terbaru dari database dalam bentuk slider --}}
-<section class="py-16 bg-[#00092D] relative">
+{{-- Background diubah ke warna baru --}}
+<section class="py-16 bg-[#DBE1F7] relative">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-3/4 bg-[#254E99] opacity-10 blur-[100px] rounded-full pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-6 relative z-10">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold text-white mb-2 tracking-wide">BSD Terkini</h2>
+            {{-- Warna teks diubah ke warna gelap --}}
+            <h2 class="text-3xl font-bold text-[#001f3f] mb-2 tracking-wide">BSD Terkini</h2>
             <div class="h-1 w-20 bg-gradient-to-r from-[#254E99] to-[#7C18B6] mx-auto rounded-full"></div>
         </div>
         
         {{-- Kondisi untuk mengecek apakah ada data berita. Jika tidak, tampilkan pesan. --}}
         @if($beritasTerkini->isEmpty())
-            <p class="text-center text-gray-500 py-10">Belum ada berita terbaru yang diterbitkan. Silakan tambahkan dari Admin Dashboard.</p>
+            <p class="text-center text-gray-700 py-10">Belum ada berita terbaru yang diterbitkan. Silakan tambahkan dari Admin Dashboard.</p>
         @else
         {{-- CONTAINER SLIDER --}}
         <div class="swiper mySwiper pb-12">
@@ -250,7 +266,8 @@
                 {{-- LOOPING BERITA DARI DATABASE --}}
                 @foreach($beritasTerkini as $berita)
                 <div class="swiper-slide !h-auto"> 
-                    <div class="bg-[#00092D] border border-[#254E99]/30 rounded-2xl overflow-hidden shadow-lg group hover:-translate-y-1 transition-transform duration-300">
+                    {{-- Background card diubah ke warna gelap untuk kontras --}}
+                    <div class="bg-[#001f3f] border border-[#254E99]/30 rounded-2xl overflow-hidden shadow-lg group hover:-translate-y-1 transition-transform duration-300">
                         <div class="h-52 w-full overflow-hidden relative bg-gray-800"> {{-- Tinggi tetap untuk konsistensi --}}
                             {{-- GAMBAR DARI DATABASE (Gunakan 'storage/') --}}
                             <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" 
@@ -267,7 +284,8 @@
                                 {{ $berita->judul }} {{-- JUDUL DARI DB --}}
                             </h3>
                             
-                            <div class="pt-4 border-t border-gray-800">
+                            {{-- Border diubah ke warna gelap yang sesuai --}}
+                            <div class="pt-4 border-t border-gray-700">
                                 {{-- Link ke Halaman Lengkap --}}
                                 <a href="{{ route('berita.show', $berita) }}"
                                    class="text-sm text-gray-400 hover:text-white flex items-center gap-2 transition-colors">

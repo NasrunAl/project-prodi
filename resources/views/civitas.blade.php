@@ -7,7 +7,8 @@
 @endpush
 
 @section('content')
-<div class="bg-[#00092D] min-h-screen relative pb-20 overflow-hidden">
+{{-- Background diubah ke warna baru --}}
+<div class="bg-[#DBE1F7] min-h-screen relative pb-20 overflow-hidden">
 
     {{-- Background Glow --}}
     <div class="absolute inset-0 pointer-events-none">
@@ -15,20 +16,23 @@
         <div class="absolute bottom-0 right-10 w-[600px] h-[600px] bg-[#9e7f3b] opacity-10 blur-[150px] rounded-full"></div>
     </div>
 
-{{-- ==================== 0. KOORDINATOR PROGRAM STUDI (KINI COLLAPSIBLE) ==================== --}}
+{{-- ==================== 0. KOORDINATOR PROGRAM STUDI (KINI COLLAPSIBLE) - MODIFIKASI DIMULAI ==================== --}}
 @if(isset($koordinators) && $koordinators->count() > 0)
     <div class="relative z-10 mt-10">
-        <div class="w-full py-6 mb-16 border-y-2 border-white/15 bg-[#00092D]/60 backdrop-blur-md">
+        {{-- Border dan Background diubah ke warna gelap yang lain agar kontras dengan latar belakang --}}
+        <div class="w-full py-6 mb-16 border-y-2 border-gray-300/60 bg-[#001f3f]/60 backdrop-blur-md">
             <h2 class="text-center text-3xl font-bold text-[#c5a059] tracking-wider uppercase drop-shadow-lg">Koordinator Program Studi</h2>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 mb-20">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {{-- MODIFIKASI 1: Mengubah grid menjadi flexbox dan menambahkan `justify-center` untuk menengahkan card --}}
+            <div class="flex justify-center flex-wrap gap-8">
                 @foreach($koordinators as $koordinator)
-                <div class="bg-[#0e1630] border-2 border-[#c5a059]/80 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(197,160,89,0.2)] transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(197,160,89,0.4)] duration-300 transform flex flex-col items-center" x-data="{ open: true }">
+                {{-- MODIFIKASI 2: Mengubah lebar card menjadi 100% pada mobile dan max-w-sm pada layar besar --}}
+                <div class="w-full sm:max-w-sm bg-[#001f3f] border-2 border-[#c5a059]/80 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(197,160,89,0.2)] transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(197,160,89,0.4)] duration-300 transform flex flex-col items-center" x-data="{ open: true }">
 
                     {{-- Kontainer Foto & Informasi Singkat --}}
-                    <div class="w-full overflow-hidden relative aspect-[4/5] max-h-[400px] bg-[#00092D]">
+                    <div class="w-full overflow-hidden relative aspect-[4/5] max-h-[400px] bg-[#001f3f]">
                         <img src="{{ $koordinator->foto ? asset('storage/'.$koordinator->foto) : 'https://placehold.co/400x500/2d5a8c/ffffff?text=KOORDINATOR' }}"
                              class="w-full h-full object-contain" style="filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));">
                     </div>
@@ -37,20 +41,24 @@
                         <h3 class="text-xl text-white font-bold">{{ $koordinator->nama }}</h3>
                     </div>
 
-                    {{-- Tombol Selengkapnya (Fungsional) --}}
-                    <button @click="open = !open" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-[#c5a059] text-[#00092D] font-semibold hover:bg-[#a78048] transition transform focus:outline-none focus:ring-4 focus:ring-[#c5a059]/50">
-                        Selengkapnya <i class="fas fa-caret-down ml-1 transition-transform duration-300" :class="{ 'rotate-180': open }"></i>
-                    </button>
+                    {{-- MODIFIKASI 3: Tambahkan padding vertikal/horizontal pada tombol dan ubah teks tombol --}}
+                    <div class="p-6 w-full flex justify-center pt-2">
+                        <button @click="open = !open" class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#c5a059] text-[#001f3f] font-semibold hover:bg-[#a78048] transition transform focus:outline-none focus:ring-4 focus:ring-[#c5a059]/50 w-full justify-center">
+                            <span x-text="open ? 'Sembunyikan Detail' : 'Selengkapnya'">Selengkapnya</span>
+                            <i class="fas fa-caret-down ml-1 transition-transform duration-300" :class="{ 'rotate-180': open }"></i>
+                        </button>
+                    </div>
+
 
                     {{-- DROP DOWN DETAIL BARU --}}
                     <div x-show="open" x-collapse.duration.500ms class="w-full mt-4 px-4 pb-6">
-                        <div class="p-4 bg-[#00102a] border-2 border-[#c5a059] rounded-xl shadow-[0_8px_30px_rgba(197,160,89,0.12)] text-left">
+                        <div class="p-4 bg-[#001f3f] border-2 border-[#c5a059] rounded-xl shadow-[0_8px_30px_rgba(197,160,89,0.12)] text-left">
                             
                             {{-- BAGIAN NIP --}}
                             @if(isset($koordinator->nip))
                             <div class="py-2">
                                 <span class="text-xl font-bold text-white">
-                                    <span class="bg-[#c5a059] text-[#00092D] px-2 py-1 mr-3 rounded-md text-base">NIP</span> 
+                                    <span class="bg-[#c5a059] text-[#001f3f] px-2 py-1 mr-3 rounded-md text-base">NIP</span> 
                                     {{ $koordinator->nip }}
                                 </span>
                             </div>
@@ -99,17 +107,20 @@
 {{-- ==================== 1. DOSEN (DESAIN SAMA + FUNGSI BUKA/TUTUP) ==================== --}}
 @if(isset($dosens) && $dosens->count() > 0)
     <div class="relative z-10 mt-10">
-        <div class="w-full py-6 mb-16 border-y-2 border-white/15 bg-[#00092D]/60 backdrop-blur-md">
+        {{-- Border dan Background diubah ke warna gelap yang lain agar kontras dengan latar belakang --}}
+        <div class="w-full py-6 mb-16 border-y-2 border-gray-300/60 bg-[#001f3f]/60 backdrop-blur-md">
             <h2 class="text-center text-3xl font-bold text-[#c5a059] tracking-wider uppercase drop-shadow-lg">Dosen</h2>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 mb-20">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($dosens as $dosen)
-                <div class="bg-[#0e1630] border-2 border-[#c5a059]/80 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(197,160,89,0.2)] transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(197,160,89,0.4)] duration-300 transform flex flex-col items-center" x-data="{ open: false }">
+                {{-- Card background diubah ke warna gelap yang lain agar kontras --}}
+                <div class="bg-[#001f3f] border-2 border-[#c5a059]/80 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(197,160,89,0.2)] transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(197,160,89,0.4)] duration-300 transform flex flex-col items-center" x-data="{ open: false }">
 
                     {{-- Kontainer Foto & Informasi Singkat --}}
-                    <div class="w-full overflow-hidden relative aspect-[4/5] max-h-[400px] bg-[#00092D]">
+                    {{-- Background foto diubah ke warna gelap yang lain --}}
+                    <div class="w-full overflow-hidden relative aspect-[4/5] max-h-[400px] bg-[#001f3f]">
                         <img src="{{ $dosen->foto ? asset('storage/'.$dosen->foto) : 'https://placehold.co/400x500/1e2549/ffffff?text=' . urlencode(strtoupper($dosen->kategori ?? 'DOSEN')) }}"
                              class="w-full h-full object-contain" style="filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));">
                     </div>
@@ -119,19 +130,25 @@
                     </div>
 
                     {{-- Tombol Selengkapnya (Tombol Fungsional Collapsible) --}}
-                    <button @click="open = !open" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-[#c5a059] text-[#00092D] font-semibold hover:bg-[#a78048] transition transform focus:outline-none focus:ring-4 focus:ring-[#c5a059]/50">
-                        Selengkapnya <i class="fas fa-caret-down ml-1 transition-transform duration-300" :class="{ 'rotate-180': open }"></i>
-                    </button>
+                    {{-- Tombol diubah agar memiliki padding konsisten dengan koordinator --}}
+                    <div class="p-6 w-full flex justify-center pt-2">
+                        <button @click="open = !open" class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#c5a059] text-[#001f3f] font-semibold hover:bg-[#a78048] transition transform focus:outline-none focus:ring-4 focus:ring-[#c5a059]/50 w-full justify-center">
+                            <span x-text="open ? 'Sembunyikan Detail' : 'Selengkapnya'">Selengkapnya</span>
+                            <i class="fas fa-caret-down ml-1 transition-transform duration-300" :class="{ 'rotate-180': open }"></i>
+                        </button>
+                    </div>
 
                     {{-- DROP DOWN DETAIL BARU --}}
                     <div x-show="open" x-collapse.duration.500ms class="w-full mt-4 px-4 pb-6">
-                        <div class="p-4 bg-[#00102a]/80 border-2 border-[#c5a059] rounded-xl shadow-[0_8px_30px_rgba(197,160,89,0.12)] text-left">
+                        {{-- Background detail diubah ke warna gelap yang lain --}}
+                        <div class="p-4 bg-[#001f3f]/80 border-2 border-[#c5a059] rounded-xl shadow-[0_8px_30px_rgba(197,160,89,0.12)] text-left">
                             
                             {{-- BAGIAN NIP --}}
                             @if(isset($dosen->nip))
                             <div class="py-2">
                                 <span class="text-xl font-bold text-white">
-                                    <span class="bg-[#c5a059] text-[#00092D] px-2 py-1 mr-3 rounded-md text-base">NIP</span> 
+                                    {{-- Teks NIP diubah ke warna gelap untuk kontras dengan background NIP --}}
+                                    <span class="bg-[#c5a059] text-[#001f3f] px-2 py-1 mr-3 rounded-md text-base">NIP</span> 
                                     {{ $dosen->nip }}
                                 </span>
                             </div>
@@ -177,7 +194,8 @@
 {{-- ==================== 2. STAFF & KARYAWAN (DESAIN SAMA + FUNGSI BUKA/TUTUP) ==================== --}}
 @if((isset($admins) && $admins->count() > 0) || (isset($teknisis) && $teknisis->count() > 0))
     <div class="relative z-10">
-        <div class="w-full py-6 mb-16 border-y-2 border-white/15 bg-[#00092D]/60 backdrop-blur-md">
+        {{-- Border dan Background diubah ke warna gelap yang lain agar kontras dengan latar belakang --}}
+        <div class="w-full py-6 mb-16 border-y-2 border-gray-300/60 bg-[#001f3f]/60 backdrop-blur-md">
             <h2 class="text-center text-3xl font-bold text-[#c5a059] tracking-wider uppercase drop-shadow-lg">Staff & Karyawan</h2>
         </div>
 
@@ -185,10 +203,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {{-- Admin Staff --}}
                 @foreach($admins as $admin)
-                <div class="bg-[#0e1630] border-2 border-[#c5a059]/80 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(197,160,89,0.2)] transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(197,160,89,0.4)] duration-300 transform flex flex-col items-center" x-data="{ open: false }">
+                {{-- Card background diubah ke warna gelap yang lain agar kontras --}}
+                <div class="bg-[#001f3f] border-2 border-[#c5a059]/80 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(197,160,89,0.2)] transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(197,160,89,0.4)] duration-300 transform flex flex-col items-center" x-data="{ open: false }">
 
                     {{-- Kontainer Foto & Informasi Singkat --}}
-                    <div class="w-full overflow-hidden relative aspect-[4/5] max-h-[400px] bg-[#00092D]">
+                    {{-- Background foto diubah ke warna gelap yang lain --}}
+                    <div class="w-full overflow-hidden relative aspect-[4/5] max-h-[400px] bg-[#001f3f]">
                         <img src="{{ $admin->foto ? asset('storage/'.$admin->foto) : 'https://placehold.co/400x500/DC2626/ffffff?text=ADMIN' }}"
                              class="w-full h-full object-contain" style="filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));">
                     </div>
@@ -199,19 +219,25 @@
                     </div>
 
                     {{-- Tombol Selengkapnya (Tombol Fungsional Collapsible) --}}
-                    <button @click="open = !open" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-[#c5a059] text-[#00092D] font-semibold hover:bg-[#a78048] transition transform focus:outline-none focus:ring-4 focus:ring-[#c5a059]/50">
-                        Selengkapnya <i class="fas fa-caret-down ml-1 transition-transform duration-300" :class="{ 'rotate-180': open }"></i>
-                    </button>
+                    {{-- Tombol diubah agar memiliki padding konsisten dengan koordinator --}}
+                    <div class="p-6 w-full flex justify-center pt-2">
+                        <button @click="open = !open" class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#c5a059] text-[#001f3f] font-semibold hover:bg-[#a78048] transition transform focus:outline-none focus:ring-4 focus:ring-[#c5a059]/50 w-full justify-center">
+                            <span x-text="open ? 'Sembunyikan Detail' : 'Selengkapnya'">Selengkapnya</span>
+                            <i class="fas fa-caret-down ml-1 transition-transform duration-300" :class="{ 'rotate-180': open }"></i>
+                        </button>
+                    </div>
 
                     {{-- DROP DOWN DETAIL BARU --}}
                     <div x-show="open" x-collapse.duration.500ms class="w-full mt-4 px-4 pb-6">
-                        <div class="p-4 bg-[#00102a]/80 border-2 border-[#c5a059] rounded-xl shadow-[0_8px_30px_rgba(197,160,89,0.12)] text-left">
+                        {{-- Background detail diubah ke warna gelap yang lain --}}
+                        <div class="p-4 bg-[#001f3f]/80 border-2 border-[#c5a059] rounded-xl shadow-[0_8px_30px_rgba(197,160,89,0.12)] text-left">
 
                             {{-- BAGIAN NIP --}}
                             @if(isset($admin->nip))
                             <div class="py-2">
                                 <span class="text-xl font-bold text-white">
-                                    <span class="bg-[#c5a059] text-[#00092D] px-2 py-1 mr-3 rounded-md text-base">NIP</span> 
+                                    {{-- Teks NIP diubah ke warna gelap untuk kontras dengan background NIP --}}
+                                    <span class="bg-[#c5a059] text-[#001f3f] px-2 py-1 mr-3 rounded-md text-base">NIP</span> 
                                     {{ $admin->nip }}
                                 </span>
                             </div>
@@ -249,10 +275,12 @@
 
                 {{-- Teknisi Staff --}}
                 @foreach($teknisis as $teknisi)
-                <div class="bg-[#0e1630] border-2 border-[#c5a059]/80 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(197,160,89,0.2)] transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(197,160,89,0.4)] duration-300 transform flex flex-col items-center" x-data="{ open: false }">
+                {{-- Card background diubah ke warna gelap yang lain agar kontras --}}
+                <div class="bg-[#001f3f] border-2 border-[#c5a059]/80 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(197,160,89,0.2)] transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(197,160,89,0.4)] duration-300 transform flex flex-col items-center" x-data="{ open: false }">
 
                     {{-- Kontainer Foto & Informasi Singkat --}}
-                    <div class="w-full overflow-hidden relative aspect-[4/5] max-h-[400px] bg-[#00092D]">
+                    {{-- Background foto diubah ke warna gelap yang lain --}}
+                    <div class="w-full overflow-hidden relative aspect-[4/5] max-h-[400px] bg-[#001f3f]">
                         <img src="{{ $teknisi->foto ? asset('storage/'.$teknisi->foto) : 'https://placehold.co/400x500/' . ($loop->iteration % 2 == 0 ? '254E99' : '99254E') . '/ffffff?text=TEKNISI' }}"
                              class="w-full h-full object-contain" style="filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));">
                     </div>
@@ -263,19 +291,25 @@
                     </div>
 
                     {{-- Tombol Selengkapnya (Tombol Fungsional Collapsible) --}}
-                    <button @click="open = !open" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-[#c5a059] text-[#00092D] font-semibold hover:bg-[#a78048] transition transform focus:outline-none focus:ring-4 focus:ring-[#c5a059]/50">
-                        Selengkapnya <i class="fas fa-caret-down ml-1 transition-transform duration-300" :class="{ 'rotate-180': open }"></i>
-                    </button>
+                    {{-- Tombol diubah agar memiliki padding konsisten dengan koordinator --}}
+                    <div class="p-6 w-full flex justify-center pt-2">
+                        <button @click="open = !open" class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#c5a059] text-[#001f3f] font-semibold hover:bg-[#a78048] transition transform focus:outline-none focus:ring-4 focus:ring-[#c5a059]/50 w-full justify-center">
+                            <span x-text="open ? 'Sembunyikan Detail' : 'Selengkapnya'">Selengkapnya</span>
+                            <i class="fas fa-caret-down ml-1 transition-transform duration-300" :class="{ 'rotate-180': open }"></i>
+                        </button>
+                    </div>
 
                     {{-- DROP DOWN DETAIL BARU --}}
                     <div x-show="open" x-collapse.duration.500ms class="w-full mt-4 px-4 pb-6">
-                        <div class="p-4 bg-[#00102a]/80 border-2 border-[#c5a059] rounded-xl shadow-[0_8px_30px_rgba(197,160,89,0.12)] text-left">
+                        {{-- Background detail diubah ke warna gelap yang lain --}}
+                        <div class="p-4 bg-[#001f3f]/80 border-2 border-[#c5a059] rounded-xl shadow-[0_8px_30px_rgba(197,160,89,0.12)] text-left">
 
                             {{-- BAGIAN NIP --}}
                             @if(isset($teknisi->nip))
                             <div class="py-2">
                                 <span class="text-xl font-bold text-white">
-                                    <span class="bg-[#c5a059] text-[#00092D] px-2 py-1 mr-3 rounded-md text-base">NIP</span> 
+                                    {{-- Teks NIP diubah ke warna gelap untuk kontras dengan background NIP --}}
+                                    <span class="bg-[#c5a059] text-[#001f3f] px-2 py-1 mr-3 rounded-md text-base">NIP</span> 
                                     {{ $teknisi->nip }}
                                 </span>
                             </div>

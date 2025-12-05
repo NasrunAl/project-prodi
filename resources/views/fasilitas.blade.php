@@ -8,7 +8,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 {{-- 1. HERO SECTION (SLIDER DINAMIS) --}}
-<div class="relative h-[70vh] w-full overflow-hidden group bg-[#050511]">
+{{-- Warna background hero diubah menjadi warna gelap yang lain agar kontras dengan teks --}}
+<div class="relative h-[70vh] w-full overflow-hidden group bg-[#DBE1F7] -mt-24">
     
     <div class="swiper facilityHeroSwiper h-full w-full">
         <div class="swiper-wrapper">
@@ -19,13 +20,14 @@
                 {{-- GAMBAR DARI STORAGE --}}
                 <img src="{{ asset('storage/' . $item->gambar) }}" class="w-full h-full object-cover">
                 
-                <div class="absolute inset-0 bg-gradient-to-t from-[#050511] via-[#050511]/20 to-transparent"></div>
+                {{-- Gradien diubah ke warna gelap lain untuk kontras --}}
+                <div class="absolute inset-0 bg-gradient-to-t from-[#001f3f] via-[#001f3f]/20 to-transparent"></div>
                 
                 {{-- Kontainer untuk membatasi lebar konten agar sama dengan halaman Home --}}
                 <div class="absolute bottom-20 left-0 right-0 z-20 px-4">
                     <div class="max-w-6xl mx-auto text-center">
-                        {{-- DESKRIPSI SINGKAT ATAU IKON FA SEBAGAI SUBTITLE --}}
-                        <span class="text-[#c5a059] tracking-[0.3em] text-sm font-bold uppercase mb-3 block animate-fadeIn">
+                        {{-- MODIFIKASI: text-sm diubah menjadi text-xl agar lebih besar --}}
+                        <span class="text-[#c5a059] tracking-[0.3em] text-xl font-bold uppercase mb-3 block animate-fadeIn">
                             {{ $item->deskripsi ?? 'Fasilitas Program Studi' }}
                         </span>
                         {{-- NAMA FASILITAS SEBAGAI JUDUL --}}
@@ -54,11 +56,14 @@
 </div>
 
 {{-- 2. INTRO TEXT --}}
-<section class="py-16 px-6 bg-[#00092D] text-center relative">
+{{-- Background diubah ke warna baru --}}
+<section class="py-16 px-6 bg-[#DBE1F7] text-center relative">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[#254E99] to-transparent opacity-50"></div>
     <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6 text-white">Sarana Pembelajaran <span class="text-[#7C18B6]">Modern</span></h2>
-        <p class="text-gray-400 leading-relaxed text-lg">
+        {{-- Warna teks judul diubah ke warna gelap --}}
+        <h2 class="text-3xl font-bold mb-6 text-[#001f3f]">Sarana Pembelajaran <span class="text-[#7C18B6]">Modern</span></h2>
+        {{-- Warna teks diubah ke warna gelap yang sesuai --}}
+        <p class="text-gray-700 leading-relaxed text-2xl">
             Program Studi Bisnis Digital menyediakan berbagai fasilitas modern untuk mendukung proses belajar yang kreatif, 
             kolaboratif, dan berbasis teknologi. Setiap ruang dirancang agar mahasiswa dapat mengembangkan kompetensi digital secara optimal.
         </p>
@@ -67,24 +72,28 @@
 
 
 {{-- 3. GALLERY GRID (Dinamis dari Database) --}}
-<section class="pb-24 px-4 max-w-7xl mx-auto bg-[#00092D]">
+{{-- Background diubah ke warna baru --}}
+<section class="pb-24 px-4 max-w-7xl mx-auto bg-[#DBE1F7]">
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($fasilitas as $item)
         {{-- Card Fasilitas --}}
-        <div class="group relative rounded-2xl overflow-hidden shadow-lg border border-[#254E99]/30 h-[300px] bg-[#101025]">
+        {{-- MODIFIKASI: Card background diubah ke warna terang (DBE1F7) --}}
+        <div class="group relative rounded-2xl overflow-hidden shadow-lg border border-[#254E99]/30 h-[300px] bg-[#DBE1F7]">
             
             {{-- Gambar dari storage --}}
             <img src="{{ asset('storage/' . $item->gambar) }}" 
                  alt="{{ $item->nama }}"
                  class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:opacity-80">
             
+            {{-- Overlay tetap gelap agar teks di label terbaca --}}
             <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
             
             {{-- Floating Label --}}
             <div class="absolute bottom-4 left-4 right-4">
                 <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 flex justify-between items-center">
-                    <span class="text-white font-semibold">{{ $item->nama }}</span>
+                    {{-- MODIFIKASI: text-white diubah menjadi text-[#001f3f] agar kontras dengan card terang --}}
+                    <span class="text-[#001f3f] font-semibold">{{ $item->nama }}</span>
                     {{-- Ikon Font Awesome --}}
                     @if($item->ikon_fa)
                         <i class="{{ $item->ikon_fa }} text-xl text-[#c5a059]"></i> 
@@ -97,7 +106,7 @@
             
             {{-- Overlay Deskripsi (Muncul saat hover) --}}
             <div class="absolute inset-0 p-6 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition duration-300">
-                <p class="text-white text-center text-sm italic line-clamp-4">
+                <p class="text-white text-center text-base italic line-clamp-4">
                     {{ $item->deskripsi ?? 'Deskripsi belum tersedia.' }}
                 </p>
             </div>
@@ -106,7 +115,8 @@
         @empty
         {{-- Jika data kosong --}}
         <div class="col-span-full text-center py-10">
-            <p class="text-gray-400">Data fasilitas belum tersedia atau belum ditambahkan oleh Admin.</p>
+            {{-- MODIFIKASI: text-gray-400 diubah menjadi text-gray-700 agar terbaca --}}
+            <p class="text-gray-700">Data fasilitas belum tersedia atau belum ditambahkan oleh Admin.</p>
         </div>
         @endforelse
     </div>

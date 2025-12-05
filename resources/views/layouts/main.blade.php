@@ -21,7 +21,7 @@
             theme: {
                 extend: {
                     colors: {
-                        'polije-bg': '#00092D',       /* Background sangat gelap sesuai footer */
+                        'polije-bg': '#DBE1F7',       /* Background sangat gelap sesuai footer */
                         'polije-nav': 'rgba(0, 9, 45, 0.85)', /* Glass nav base */
                         'neon-purple': '#6d28d9',     /* Ungu untuk hover/button */
                         'neon-light': '#a78bfa',      /* Ungu muda untuk gradient */
@@ -36,7 +36,7 @@
     </script>
 
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #00092D; color: white; }
+        body { font-family: 'Poppins', sans-serif; background-color: #DBE1F7; color: white; }
 
         /* Glassmorphism Navbar */
         .glass-nav {

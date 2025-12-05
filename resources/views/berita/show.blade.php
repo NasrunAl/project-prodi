@@ -65,7 +65,7 @@
                     @endif
 
                     {{-- Main Content --}}
-                    <div class="text-gray-300 leading-relaxed space-y-6">
+                    <div class="text-gray-300 leading-relaxed space-y-6 text-base">
                         {!! nl2br(e($berita->konten)) !!}
                     </div>
                 </div>

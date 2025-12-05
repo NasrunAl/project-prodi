@@ -3,7 +3,8 @@
 @section('title', 'Akademik - Bisnis Digital')
 
 @section('content')
-<section class="py-20 px-4 bg-[#00092D] relative overflow-hidden min-h-screen">
+{{-- Background diubah ke warna baru --}}
+<section class="py-20 px-4 bg-[#DBE1F7] relative overflow-hidden min-h-screen">
     
     {{-- Background Glow --}}
     <div class="absolute top-0 left-0 w-96 h-96 bg-[#254E99] opacity-10 blur-[150px] rounded-full pointer-events-none"></div>
@@ -13,9 +14,11 @@
         
         {{-- Header Section --}}
         <div class="text-center mb-20 mt-12">
-            <h2 class="text-5xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">Profil Lulusan</h2>
+            {{-- Warna teks diubah ke warna gelap --}}
+            <h2 class="text-5xl md:text-6xl font-bold text-[#001f3f] mb-4 drop-shadow-lg">Profil Lulusan</h2>
             <div class="h-2 w-32 bg-gradient-to-r from-[#c5a059] to-[#7C18B6] mx-auto rounded-full shadow-lg"></div>
-            <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+            {{-- Warna teks diubah ke warna gelap --}}
+            <p class="text-gray-700 mt-4 max-w-2xl text-2xl mx-auto">
                 Lulusan Bisnis Digital dibekali dengan kompetensi teknis dan manajerial untuk bersaing di era global.
             </p>
         </div>
@@ -25,17 +28,20 @@
             
             @foreach($profils as $profil)
             {{-- LOOPING CARD MULAI DARI SINI --}}
-            <div class="group relative rounded-2xl overflow-hidden h-72 border-2 border-[#254E99]/40 bg-[#00092D] hover:border-[#7C18B6] transition duration-300 hover:shadow-[0_0_30px_rgba(197,160,89,0.15)] transform hover:-translate-y-2">
+            {{-- Card background diubah ke warna gelap yang lain agar kontras --}}
+            <div class="group relative rounded-2xl overflow-hidden h-72 border-2 border-[#254E99]/40 bg-[#001f3f] hover:border-[#7C18B6] transition duration-300 hover:shadow-[0_0_30px_rgba(197,160,89,0.15)] transform hover:-translate-y-2">
                 
                 {{-- Gambar Latar (Pakai Storage Link) --}}
                 @if($profil->ikon)
                     <img src="{{ asset('storage/' . $profil->ikon) }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40">
                 @else
                     {{-- Fallback jika admin lupa upload gambar --}}
-                    <div class="w-full h-full bg-gradient-to-br from-[#101025] to-[#254E99] opacity-60"></div>
+                    {{-- Background fallback diubah ke warna gelap yang lain --}}
+                    <div class="w-full h-full bg-gradient-to-br from-[#001f3f] to-[#254E99] opacity-60"></div>
                 @endif
 
-                <div class="absolute inset-0 bg-gradient-to-t from-[#050511] via-[#050511]/50 to-transparent"></div>
+                {{-- Gradien diubah ke warna gelap yang lain --}}
+                <div class="absolute inset-0 bg-gradient-to-t from-[#001f3f] via-[#001f3f]/50 to-transparent"></div>
                 
                 <div class="absolute bottom-0 left-0 p-6">
                     {{-- Judul Profil (Warna-warni sesuai urutan ganjil/genap agar cantik) --}}
@@ -44,7 +50,7 @@
                     </h3>
                     
                     {{-- Deskripsi --}}
-                    <p class="text-sm text-gray-300 leading-relaxed transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-500 delay-100">
+                    <p class="text-base text-gray-300 leading-relaxed transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-500 delay-100">
                         {{ $profil->deskripsi }}
                     </p>
                 </div>
@@ -53,7 +59,8 @@
 
             {{-- JIKA DATA KOSONG --}}
             @if($profils->isEmpty())
-            <div class="col-span-2 text-center py-16 bg-[#00092D] rounded-2xl border-2 border-dashed border-[#254E99]/40 hover:border-[#7C18B6] transition duration-300">
+            {{-- Background diubah ke warna gelap yang lain --}}
+            <div class="col-span-2 text-center py-16 bg-[#001f3f] rounded-2xl border-2 border-dashed border-[#254E99]/40 hover:border-[#7C18B6] transition duration-300">
                 <p class="text-gray-500">Belum ada data profil lulusan.</p>
             </div>
             @endif
@@ -77,7 +84,7 @@
                 <h3 class="relative font-bold text-3xl text-white mb-6 drop-shadow-md">Kurikulum</h3>
                 
                 {{-- Tombol Unduh PDF (Outline Emas) --}}
-                <a href="#" class="relative w-full py-3 rounded-full bg-transparent border-2 border-[#c5a059] text-[#c5a059] font-bold hover:bg-[#c5a059] hover:text-[#00092D] transition duration-300 flex items-center justify-center gap-2 max-w-xs">
+                <a href="#" class="relative w-full py-3 rounded-full bg-transparent border-2 border-[#c5a059] text-[#c5a059] font-bold hover:bg-[#c5a059] hover:text-[#001f3f] transition duration-300 flex items-center justify-center gap-2 max-w-xs">
                     <i class="fas fa-download"></i> Unduh PDF
                 </a>
             </div>
@@ -96,7 +103,7 @@
                 <h3 class="relative font-bold text-3xl text-white mb-6 drop-shadow-md">Mata Kuliah</h3>
                 
                 {{-- Tombol Unduh PDF (Outline Emas) --}}
-                <a href="#" class="relative w-full py-3 rounded-full bg-transparent border-2 border-[#c5a059] text-[#c5a059] font-bold hover:bg-[#c5a059] hover:text-[#00092D] transition duration-300 flex items-center justify-center gap-2 max-w-xs">
+                <a href="#" class="relative w-full py-3 rounded-full bg-transparent border-2 border-[#c5a059] text-[#c5a059] font-bold hover:bg-[#c5a059] hover:text-[#001f3f] transition duration-300 flex items-center justify-center gap-2 max-w-xs">
                     <i class="fas fa-download"></i> Unduh PDF
                 </a>
             </div>

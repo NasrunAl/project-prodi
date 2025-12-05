@@ -51,7 +51,7 @@
                             </td>
                             <td class="py-3 px-2">
                                 <span class="font-medium text-white">{{ $item->nama }}</span>
-                                <p class="text-[11px] text-gray-500 line-clamp-1 mt-1">{{ $item->deskripsi }}</p>
+                                <p class="text-base text-gray-500 line-clamp-1 mt-1">{{ $item->deskripsi }}</p>
                             </td>
                             <td class="py-3 px-2 text-center">
                                 @if($item->ikon_fa)

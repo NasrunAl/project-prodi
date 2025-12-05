@@ -46,7 +46,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ================== ADMIN (HANYA SETELAH LOGIN) ================== //
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
-    
+   
     Route::get('/', function () {
         return redirect()->route('admin.dashboard');
     });
@@ -60,4 +60,4 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     // CRUD Fasilitas (admin)
     Route::resource('fasilitas', AdminFasilitasController::class)->except(['show']);
-});
+    });

@@ -14,27 +14,27 @@
     <table class="w-full text-sm text-left text-gray-400">
         <thead class="text-xs text-gray-200 uppercase bg-gray-900 border-b border-gray-800">
             <tr>
-                <th class="px-6 py-3">Urutan</th>
-                <th class="px-6 py-3">Gambar</th>
-                <th class="px-6 py-3">Judul Profesi</th>
-                <th class="px-6 py-3">Deskripsi</th>
-                <th class="px-6 py-3 text-center">Aksi</th>
+                <th class="px-8 py-3">Urutan</th>
+                <th class="px-8 py-3">Gambar</th>
+                <th class="px-8 py-3">Judul Profesi</th>
+                <th class="px-8 py-3">Deskripsi</th>
+                <th class="px-8 py-3 text-center">Aksi</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-800">
             @foreach($profils as $profil)
             <tr class="hover:bg-gray-800/50">
-                <td class="px-6 py-4 font-mono">{{ $profil->urutan }}</td>
-                <td class="px-6 py-4">
+                <td class="px-8 py-4 font-mono">{{ $profil->urutan }}</td>
+                <td class="px-8 py-4">
                     @if($profil->ikon)
                         <img src="{{ asset('storage/' . $profil->ikon) }}" class="w-16 h-10 object-cover rounded">
                     @else
                         -
                     @endif
                 </td>
-                <td class="px-6 py-4 text-white font-bold">{{ $profil->judul }}</td>
-                <td class="px-6 py-4 truncate max-w-xs">{{ $profil->deskripsi }}</td>
-                <td class="px-6 py-4 text-center flex justify-center gap-3">
+                <td class="px-8 py-4 text-white font-bold">{{ $profil->judul }}</td>
+                <td class="px-8 py-4 truncate max-w-xs text-base">{{ $profil->deskripsi }}</td>
+                <td class="px-8 py-4 text-center flex justify-center gap-3">
                     <a href="{{ route('admin.profil-lulusan.edit', $profil->id) }}" class="text-yellow-400"><i class="fa-solid fa-pen-to-square"></i></a>
                     <form action="{{ route('admin.profil-lulusan.destroy', $profil->id) }}" method="POST" onsubmit="return confirm('Hapus?');">
                         @csrf @method('DELETE')
